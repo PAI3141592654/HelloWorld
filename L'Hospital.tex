@@ -1,0 +1,84 @@
+%“问题描述”和“证明”放在每一个section中
+
+
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts} 
+
+\title{作业一: L'Hospital法则的叙述与证明}
+
+
+\author{彭湃 \\ 数学与应用数学（强基计划） 3210100061}
+
+\begin{document}
+
+\maketitle
+
+L'Hospital法则是计算不定型极限的重要工具，其将函数商的极限转化成导函数商的极限，与离散情形的Stolz公式相似.一般认为，该法则是Johann Bernouli的成果.
+
+
+
+\section{“$\frac{0}{0}$”不定型}
+\textbf{Thm 1:}设f，g在(a, b)内可微，满足
+
+$(i)\forall x\in (a, b), g'(x)\neq0.$
+
+$(ii)\lim_{x\rightarrow a^+} {f(x)}=\lim_{x\rightarrow a^+} {g(x)}=0.$
+
+$(iii)\lim_{x\rightarrow a^+} {\frac{f'(x)}{g'(x)}}=l,  l\in \mathbb R, or \quad l=+\infty,-\infty, \infty.$
+
+则
+\begin{equation}
+\lim_{x\rightarrow a^+} {\frac{f(x)}{g(x)}}=\lim_{x\rightarrow a^+} {\frac{f'(x)}{g'(x)}}.\tag{T1}\label{L1}
+\end{equation}
+
+\textbf{Proof:}对于a<x<y<b, 我们有$\xi\in(a,b)$使得
+\begin{equation}
+\frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f'(\xi)}{g'(\xi)}\tag{1.1}
+\end{equation}
+从而
+\begin{equation}
+\inf_{t\in(a,x)}\frac{f'(t)}{g'(t)}\leq\frac{f(x)-f(y)}{g(x)-g(y)}\leq\sup_{t\in(a,x)}\frac{f'(t)}{g'(t)}\tag{1.2}
+\end{equation}
+上式中令$y\rightarrow a^+$即得
+\begin{equation}
+\inf_{t\in(a,x)}\frac{f'(t)}{g'(t)}\leq\frac{f(x)}{g(x)}\leq\sup_{t\in(a,x)}\frac{f'(t)}{g'(t)}, \quad\forall x\in(a, b).\tag{1.3}
+\end{equation}
+再令$x\rightarrow a^+$即可证(\ref{L1}).
+
+\section{“$\frac{*}{\infty }$”不定型}
+\textbf{Thm 2:}设f，g在(a, b)内可微，满足
+
+$(i)\forall x\in (a, b), g'(x)\neq0.$
+
+$(ii)\lim_{x\rightarrow a^+} {g(x)}=\infty.$
+
+$(iii)\lim_{x\rightarrow a^+} {\frac{f'(x)}{g'(x)}}=l,  l\in \mathbb R, or \quad l=+\infty,-\infty, \infty.$
+
+则
+\begin{equation}
+\lim_{x\rightarrow a^+} {\frac{f(x)}{g(x)}}=\lim_{x\rightarrow a^+} {\frac{f'(x)}{g'(x)}}.\tag{T2}\label{L2}
+\end{equation}
+
+\textbf{Proof:}对于a<x<y<b, 我们有$\xi\in(a,b)$使得
+\begin{equation}
+\frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f'(\xi)}{g'(\xi)}\tag{2.1}
+\end{equation}
+从而
+\begin{equation}
+\inf_{t\in(a,y)}\frac{f'(t)}{g'(t)}\leq\frac{f(x)-f(y)}{g(x)-g(y)}\leq\sup_{t\in(a,y)}\frac{f'(t)}{g'(t)}\tag{2.2}
+\end{equation}
+上式中令$x\rightarrow a^+$并注意到条件(ii)蕴含
+\begin{equation}
+\varliminf_{x\rightarrow a^+}\frac{f(x)}{g(x)}=\varliminf_{x\rightarrow a^+}\frac{f(x)-f(y)}{g(x)-g(y)}, 
+\varlimsup_{x\rightarrow a^+}\frac{f(x)}{g(x)}=\varlimsup_{x\rightarrow a^+}\frac{f(x)-f(y)}{g(x)-g(y)}\tag{2.3}
+\end{equation}
+可得
+\begin{equation}
+\inf_{t\in(a,y)}\frac{f'(t)}{g'(t)}\leq\varliminf_{x\rightarrow a^+}\frac{f(x)}{g(x)}
+\leq\varlimsup_{x\rightarrow a^+}\frac{f(x)}{g(x)}\leq\sup_{t\in(a,y)}\frac{f'(t)}{g'(t)}\tag{2.4}
+\end{equation}
+再令$y\rightarrow a^+$即可证(\ref{L2}).
+\end{document}
