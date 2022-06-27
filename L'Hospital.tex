@@ -31,20 +31,20 @@ $(iii)\lim_{x\rightarrow a^+} {\frac{f'(x)}{g'(x)}}=l,  l\in \mathbb R, or \quad
 
 则
 \begin{equation}
-\lim_{x\rightarrow a^+} {\frac{f(x)}{g(x)}}=\lim_{x\rightarrow a^+} {\frac{f'(x)}{g'(x)}}.\tag{T1}\label{L1}
+\lim_{x\rightarrow a^+} {\frac{f(x)}{g(x)}}=\lim_{x\rightarrow a^+} {\frac{f'(x)}{g'(x)}}.\label{L1}
 \end{equation}
 
 \textbf{Proof:}对于a<x<y<b, 我们有$\xi\in(a,b)$使得
 \begin{equation}
-\frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f'(\xi)}{g'(\xi)}\tag{1.1}
+\frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f'(\xi)}{g'(\xi)}
 \end{equation}
 从而
 \begin{equation}
-\inf_{t\in(a,x)}\frac{f'(t)}{g'(t)}\leq\frac{f(x)-f(y)}{g(x)-g(y)}\leq\sup_{t\in(a,x)}\frac{f'(t)}{g'(t)}\tag{1.2}
+\inf_{t\in(a,x)}\frac{f'(t)}{g'(t)}\leq\frac{f(x)-f(y)}{g(x)-g(y)}\leq\sup_{t\in(a,x)}\frac{f'(t)}{g'(t)}
 \end{equation}
 上式中令$y\rightarrow a^+$即得
 \begin{equation}
-\inf_{t\in(a,x)}\frac{f'(t)}{g'(t)}\leq\frac{f(x)}{g(x)}\leq\sup_{t\in(a,x)}\frac{f'(t)}{g'(t)}, \quad\forall x\in(a, b).\tag{1.3}
+\inf_{t\in(a,x)}\frac{f'(t)}{g'(t)}\leq\frac{f(x)}{g(x)}\leq\sup_{t\in(a,x)}\frac{f'(t)}{g'(t)}, \quad\forall x\in(a, b).
 \end{equation}
 再令$x\rightarrow a^+$即可证(\ref{L1}).
 
@@ -59,26 +59,26 @@ $(iii)\lim_{x\rightarrow a^+} {\frac{f'(x)}{g'(x)}}=l,  l\in \mathbb R, or \quad
 
 则
 \begin{equation}
-\lim_{x\rightarrow a^+} {\frac{f(x)}{g(x)}}=\lim_{x\rightarrow a^+} {\frac{f'(x)}{g'(x)}}.\tag{T2}\label{L2}
+\lim_{x\rightarrow a^+} {\frac{f(x)}{g(x)}}=\lim_{x\rightarrow a^+} {\frac{f'(x)}{g'(x)}}.\label{L2}
 \end{equation}
 
 \textbf{Proof:}对于a<x<y<b, 我们有$\xi\in(a,b)$使得
 \begin{equation}
-\frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f'(\xi)}{g'(\xi)}\tag{2.1}
+\frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f'(\xi)}{g'(\xi)}
 \end{equation}
 从而
 \begin{equation}
-\inf_{t\in(a,y)}\frac{f'(t)}{g'(t)}\leq\frac{f(x)-f(y)}{g(x)-g(y)}\leq\sup_{t\in(a,y)}\frac{f'(t)}{g'(t)}\tag{2.2}
+\inf_{t\in(a,y)}\frac{f'(t)}{g'(t)}\leq\frac{f(x)-f(y)}{g(x)-g(y)}\leq\sup_{t\in(a,y)}\frac{f'(t)}{g'(t)}
 \end{equation}
 上式中令$x\rightarrow a^+$并注意到条件(ii)蕴含
 \begin{equation}
 \varliminf_{x\rightarrow a^+}\frac{f(x)}{g(x)}=\varliminf_{x\rightarrow a^+}\frac{f(x)-f(y)}{g(x)-g(y)}, 
-\varlimsup_{x\rightarrow a^+}\frac{f(x)}{g(x)}=\varlimsup_{x\rightarrow a^+}\frac{f(x)-f(y)}{g(x)-g(y)}\tag{2.3}
+\varlimsup_{x\rightarrow a^+}\frac{f(x)}{g(x)}=\varlimsup_{x\rightarrow a^+}\frac{f(x)-f(y)}{g(x)-g(y)}
 \end{equation}
 可得
 \begin{equation}
 \inf_{t\in(a,y)}\frac{f'(t)}{g'(t)}\leq\varliminf_{x\rightarrow a^+}\frac{f(x)}{g(x)}
-\leq\varlimsup_{x\rightarrow a^+}\frac{f(x)}{g(x)}\leq\sup_{t\in(a,y)}\frac{f'(t)}{g'(t)}\tag{2.4}
+\leq\varlimsup_{x\rightarrow a^+}\frac{f(x)}{g(x)}\leq\sup_{t\in(a,y)}\frac{f'(t)}{g'(t)}
 \end{equation}
 再令$y\rightarrow a^+$即可证(\ref{L2}).
 \end{document}
