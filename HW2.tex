@@ -1,0 +1,115 @@
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{作业二}
+
+
+\author{彭湃3210100061}
+
+\begin{document}
+
+\maketitle
+
+\section{代码实践}
+尝试对第三十页的try it out进行了一定的修改，加入了if和for语句，代码如下：
+
+\begin{verbatim}
+#!/bin/sh
+
+salutation="Hello"
+echo $salutation
+echo "The program $0 is now running"
+echo "The third parameter was $3"
+echo "The second parameter was $2"
+echo "The first parameter was $1"
+echo "The parameter list was $*"
+echo "The user's home directory is $HOME"
+
+if [ $1 = $2 ]
+then echo "The first two parameters are same"
+else echo "The first two parameters are not same"
+fi
+    
+echo "Please enter some new greetings"
+read s1
+echo $s1
+
+for s in $s1
+do
+    echo "$s"
+done
+
+
+echo "The script is now complete"
+exit 0
+\end{verbatim}
+
+输入案例1：
+\begin{verbatim}
+./test 你 你 皮 我瓜 > res.txt
+撒日朗
+cat res.txt
+
+\end{verbatim}
+
+输出如下：
+\begin{verbatim}
+Hello
+The program ./test is now running
+The third parameter was 皮
+The second parameter was 你
+The first parameter was 你
+The parameter list was 你 你 皮 我瓜
+The user's home directory is /home/pai314159
+The first two parameters are same
+Please enter some new greetings
+撒日朗
+撒日朗
+The script is now complete
+\end{verbatim}
+
+输入案例2：
+\begin{verbatim}
+./test 你 ** 皮 我瓜 > res.txt
+撒 日 朗
+cat res.txt
+\end{verbatim}
+
+输出如下：
+\begin{verbatim}
+Hello
+The program ./test is now running
+The third parameter was test
+The second parameter was res.txt
+The first parameter was 你
+The parameter list was 你 res.txt test test~ 皮 我瓜
+The user's home directory is /home/pai314159
+The first two parameters are not same
+Please enter some new greetings
+撒 日 朗
+撒
+日
+朗
+The script is now complete
+\end{verbatim}
+
+\section{分析}
+
+\subsection{变量}
+
+当我们定义了一个变量并对其赋值后，我们需要在变量名前加上\$以访问该变量，如代码中的\$salutation就是我们自己定义的变量.系统中有一些特殊的变量，例如\textbf{环境变量}、\textbf{参数变量}.代码中用到的环境变量有\$HOME（当前用户的家目录）、\$0（shell脚本的名字），用到的参数变量有\$1、\$2、\$3（脚本程序的第1、2、3个参数）、\$*（列出脚本程序的所有参数）.
+
+\textbf{rmk:}将变量赋值为*时，其将表示该目录下所有的文件名，每个文件名占据一个位置.案例2中的**与*等价.
+
+\subsection{if\&for}
+
+可用if语句进行判断，其中if后的中括号表示布尔判断命令，若为真则执行then后的内容，若不真则执行else后的内容，此外还可使用elif来添加新的条件.本程序使用if语句判断脚本程序的前两个参数是否相同并输出结果.
+
+可用for语句来循环处理一组值.本程序使用for语句依次输出了用户输入的字符串.
+
+\textbf{rmk:}若在read s1后加上s2，则案例2后面的输出将变成“撒（回车）撒”，因为此时“日”“朗”在s2中.
+
+
+\end{document}
