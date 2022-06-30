@@ -2,17 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "svpng.h"								//ÎÄ¼ş£ºsvpng.h£¬ÓÃÓÚÉú³ÉpngÎÄ¼ş£¬ÎÄ¼şÀ´×Ôhttps://github.com/miloyip/svpng/blob/master/svpng.inc 
+#include "svpng.h"								//æ–‡ä»¶ï¼šsvpng.hï¼Œç”¨äºç”Ÿæˆpngæ–‡ä»¶ï¼Œæ–‡ä»¶æ¥è‡ªhttps://github.com/miloyip/svpng/blob/master/svpng.inc 
 
 int Times;										// 
-bool Gradient;									//±äÁ¿£º½¥±ä£¬¾ö¶¨ÊÇ·ñÊ¹ÓÃ½¥±äÉ« 
-typedef struct color{							//½á¹¹ÀàĞÍ£ºÑÕÉ«£¬²ÉÓÃRGBÄ£Ê½ 
-	uint8_t R;									//ºìÉ«Å¨¶È 
-	uint8_t G;									//ÂÌÉ«Å¨¶È 
-	uint8_t B;									//À¶É«Å¨¶È 
+bool Gradient;									//å˜é‡ï¼šæ¸å˜ï¼Œå†³å®šæ˜¯å¦ä½¿ç”¨æ¸å˜è‰² 
+typedef struct color{							//ç»“æ„ç±»å‹ï¼šé¢œè‰²ï¼Œé‡‡ç”¨RGBæ¨¡å¼ 
+	uint8_t R;									//çº¢è‰²æµ“åº¦ 
+	uint8_t G;									//ç»¿è‰²æµ“åº¦ 
+	uint8_t B;									//è“è‰²æµ“åº¦ 
 }Color;											//
 
-double mandelbrot(double x, double y) {			//º¯Êı£¬ÅĞ¶ÏÒ»¸öµãÊÇ·ñÊôÓÚÂüµÂ²©¼¯ºÏ£¬ÒÔ¼°ËüµÄµİ¹é´ÎÊı 
+double mandelbrot(double x, double y) {			//å‡½æ•°ï¼Œåˆ¤æ–­ä¸€ä¸ªç‚¹æ˜¯å¦å±äºæ›¼å¾·åšé›†åˆï¼Œä»¥åŠå®ƒçš„é€’å½’æ¬¡æ•° 
 	int i;
     double a = x, b = y;
     for( i = 0; i <Times; ++i) {
@@ -27,21 +27,26 @@ int main(void) {
 	int i,j;
     int N;
     Color f,b,g;
-    printf("ÊäÈëÕıÕûÊıN£¬Æä½«¾ö¶¨Í¼Æ¬´óĞ¡£¬Í¼Æ¬´óĞ¡Îª(N*1536)*(N*1024)£¬ËùÒÔN²»ÒË¹ı´ó£¬×îºÃÎª¸öÎ»Êı£º");scanf("%d",&N);
-    printf("ÊäÈëµİ¹é´ÎÊı£º");scanf("%d",&Times);
-    printf("ÊÇ·ñÉèÖÃ½¥±äÉ«£¿1 for yes and 0 for no£º");scanf("%d",&Gradient);
-    printf("ÇëÊäÈëÖ÷ÌåºìÉ«Å¨¶È(0-255)£º");scanf("%d",&f.R);
-    printf("ÇëÊäÈëÖ÷ÌåÂÌÉ«Å¨¶È(0-255)£º");scanf("%d",&f.G);
-    printf("ÇëÊäÈëÖ÷ÌåÀ¶É«Å¨¶È(0-255)£º");scanf("%d",&f.B);
-    printf("ÇëÊäÈë±³¾°ºìÉ«Å¨¶È(0-255)£º");scanf("%d",&b.R);
-    printf("ÇëÊäÈë±³¾°ÂÌÉ«Å¨¶È(0-255)£º");scanf("%d",&b.G);
-    printf("ÇëÊäÈë±³¾°À¶É«Å¨¶È(0-255)£º");scanf("%d",&b.B);
+    printf("Enter a positive integer N, which will determine the size of the picture.\n");
+    printf("The picture size is (N*1536)*(N*1024), so N should not be too large, preferably single digits:");
+	scanf("%d",(int*)&N);	//è¾“å…¥æ­£æ•´æ•°Nï¼Œå…¶å°†å†³å®šå›¾ç‰‡å¤§å°ï¼Œå›¾ç‰‡å¤§å°ä¸º(N*1536)*(N*1024)ï¼Œæ‰€ä»¥Nä¸å®œè¿‡å¤§ï¼Œæœ€å¥½ä¸ºä¸ªä½æ•°
+    printf("Enter the number of iterations:");scanf("%d",&Times);							//è¾“å…¥è¿­ä»£æ¬¡æ•°
+    printf("Do you want to set a gradient? 1 for yes and 0 for no. \n");
+    printf("Gradient is not supported at some time. If so, please enter 0:");
+	scanf("%d",&Gradient);																	//æ˜¯å¦è®¾ç½®æ¸å˜è‰²(å¯èƒ½ä¸æ”¯æŒæ¸å˜è‰²)
+    
+    printf("Enter the red intensity of the body(0-255):");scanf("%d",(int*)&f.R);			//è¾“å…¥ä¸»ä½“çº¢è‰²æµ“åº¦
+    printf("Enter the green intensity of the body(0-255):");scanf("%d",(int*)&f.G); 		//è¾“å…¥ä¸»ä½“ç»¿è‰²æµ“åº¦ 
+    printf("Enter the blue intensity of the body(0-255):");scanf("%d",(int*)&f.B); 			//è¾“å…¥ä¸»ä½“è“è‰²æµ“åº¦
+    printf("Enter the red intensity of the background(0-255):");scanf("%d",(int*)&b.R);		//è¾“å…¥èƒŒæ™¯çº¢è‰²æµ“åº¦
+    printf("Enter the green intensity of the background(0-255):");scanf("%d",(int*)&b.G);	//è¾“å…¥èƒŒæ™¯ç»¿è‰²æµ“åº¦
+    printf("Enter the blue intensity of the background(0-255):");scanf("%d",(int*)&b.B);	//è¾“å…¥èƒŒæ™¯è“è‰²æµ“åº¦
     if(Gradient){
-    	printf("ÇëÊäÈë½¥±äºìÉ«Å¨¶È(0-255)£º");scanf("%d",&g.R);
-    	printf("ÇëÊäÈë½¥±äÂÌÉ«Å¨¶È(0-255)£º");scanf("%d",&g.G);
-    	printf("ÇëÊäÈë½¥±äÀ¶É«Å¨¶È(0-255)£º");scanf("%d",&g.B);
+    	printf("Enter the gradient red intensity(0-255):");scanf("%d",(int*)&g.R);			//è¾“å…¥æ¸å˜çº¢è‰²æµ“åº¦
+    	printf("Enter the gradient green intensity(0-255):");scanf("%d",(int*)&g.G);		//è¾“å…¥æ¸å˜ç»¿è‰²æµ“åº¦
+    	printf("Enter the gradient blue intensity(0-255):");scanf("%d",(int*)&g.B);			//è¾“å…¥æ¸å˜è“è‰²æµ“åº¦
 	}
-	printf("Éú³ÉÍ¼Æ¬ÖĞ\n");
+	printf("Generating a picture...\n");
     int Width=N*1536;
     int Height=N*1024;
     uint8_t *data=(uint8_t*)malloc(Width*Height*3),*p=data;
@@ -69,6 +74,6 @@ int main(void) {
     svpng(file, Width, Height, data, 0);
     fclose(file);
     free(data);
-	printf("Í¼Æ¬Éú³ÉÍê±Ï"); 
+	printf("Finished."); 
     return 0;
 }
