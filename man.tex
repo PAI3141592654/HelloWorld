@@ -1,0 +1,107 @@
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{cite}
+\usepackage{url}
+
+\title{Manderbrot Set 的生成和探索}
+
+
+\author{彭湃3210100061 \\ 数学与应用数学（强基计划）}
+%标题, 作者, 摘要, 引言, 问题的背景介绍, 数学理论, 算法, 数值算例, 结论
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+曼德博集合是经典的分形之一，利用计算机可作出其近似图形。本文介绍了运用计算机画出曼德博集合的一种方法，并且增加了设置图片大小、颜色的功能。对于集合外的点，本文介绍了根据其迭代次数的不同设置不同颜色，从而增加图片丰富性的方法。
+
+\end{abstract}
+
+\section{引言}
+
+\textbf{曼德博集合}(Mandelbrot set)是一种在复平面上组成分形的点的集合，以数学家本华·曼德博的名字命名。其通过复二项式迭代生成复杂的图案。\cite{曼德博集合}运用多种编程语言，我们可以在计算机上作出曼得博集合的近似图。
+
+\section{背景与理论}
+
+本华·曼德博（法语：Benoît B. Mandelbrot，1924年11月20日－2010年10月14日）又译伯努瓦·曼德勃罗、曼德布洛特，生于波兰华沙，法国、美国数学家。曼德博是分形几何的创立者，创造了“分形”一词，并且描述了曼德博集合。\cite{本华·曼德博}
+
+曼德博集合M定义为使得序列$(0, f_c(0),f_c(f_c(0)),f_c(f_c(f_c(0))), ...)$收敛的c的集合，其中$f_c(z)=z^2+c$，c是一个复数参数。通过证明可知若$c\in M$，当且仅当上述序列的每一项都不超过2。
+
+\section{算法设计与算例}
+
+\subsection{基本思路}
+
+根据曼德博集合的定义，我们可以在屏幕上建立坐标系，对于图片文件的每一个像素点，我们获取它的坐标，设计算法判断它是否收敛。若收敛，则将其颜色设置为颜色1,否则设置为颜色2。算法的基本思路是不断迭代，每次迭代进行判断，直至中途退出$(c\notin M)$或迭代次数达到用户设置的上限$(c\in M)$，设计出如下的Setcolor程序：\cite{Mandelbrotset}
+
+\lstset{
+    numbers=left, numberstyle=\it, stepnumber=2, numbersep=5pt,
+}
+\begin{lstlisting}[language=C]
+t=0
+for each pixel
+  do get coordinate
+  while t<MaxTimes
+    do if |coordinate|>2
+    then setcolor Color2
+      break
+    else t=t+1
+  end
+  setcolor Color1
+end
+\end{lstlisting}
+
+\subsection{拓展延伸}
+
+\subsubsection{图片大小选择}
+
+由于计算机精度有限，故在迭代次数足够大时，对图片的清晰度起主要作用的是图片的大小。也就是说，在精度不变的情况下，等比例放大图片，我们可以看到更多的细节。可以让用户输入一个数字决定图片的大小：
+
+\begin{lstlisting}[language=C]
+get integer N
+set datasize (N*1536)*(N*1024)*3
+Width=N*1536  Height=N*1024
+Setcolor data
+createphoto(data,Width,Height,RGB)
+\end{lstlisting}
+
+\subsubsection{颜色选择}
+
+根据用户需求设置生成图片的颜色，此处采用RGB颜色，用户输入红、绿、蓝三种配色的浓度：
+
+\begin{lstlisting}[language=C]
+Color1={0,0,0} Color2={0,0,0}  //{R,G,B}
+get Color1 Color 2
+\end{lstlisting}
+
+\subsubsection{设置渐变色}
+M的补集中元素的颜色Color(c)可设置成关于递归次数t(c)的函数：$$Color(c)=Way_{(Color2,Color3,...,ColorN)}(t(c))$$其中Color1,...,ColorN是人为设置的常量。这使得图像内容更加丰富。
+用户选择渐变方式Way，若Way不为0,则开启渐变色模式，用户输入渐变色Color3,...,ColorN。特别地，渐变方式可以设置成线性函数：
+$$Color(c)=\frac{MaxTimes-t(c)}{MaxTimes}*Color2+\frac{t(c)}{MaxTimes}*Color3$$
+
+\subsection{算例}
+
+在提示信息下，用户输入\{N,MaxTimes,Way\},Color1\{R,G,B\},Color2\{R,G,B\},\\Color3\{R,G,B\}...ColorN\{R,G,B\}的数值，程序将生成图片文件。上面有六个例子，分别是\{{1,128,1};{255,0,50};{20,80,166};{255,255,0}\}\{{2,64,0};{0,0,0};{122,122,122}\}\\\{{14,128,1};{0,0,0};{0,0,0};{255,255,255}Localshot1\}\{{14,128,1};{0,0,0};{0,0,0};{255,255,255}Localshot2\}\\\{{2,128,(customize1)};{255,255,255}\}\{{1,128,(customize2)};{255,255,255}\}
+
+\begin{figure}
+\includegraphics[width=3.6cm,height=2.4cm]{1}
+\includegraphics[width=3.6cm,height=2.4cm]{2}
+\includegraphics[width=3.6cm,height=2.4cm]{3}
+\includegraphics[width=3.6cm,height=2.4cm]{4}
+\includegraphics[width=3.6cm,height=2.4cm]{5}
+\includegraphics[width=3.6cm,height=2.4cm]{6}
+\end{figure}
+
+\section{总结}
+
+用计算机作出曼德博集合的方法是根据像素点的坐标信息来赋予其颜色，设置的迭代次数越高，图片清晰度越高，则拟合效果更准确，细节更丰富。为了提高图片的丰富性，还可根据每个点迭代次数的多少分层设色。
+
+\bibliographystyle{plain}
+\bibliography{ref}
+
+\end{document}
