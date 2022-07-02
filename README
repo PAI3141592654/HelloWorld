@@ -1,0 +1,14 @@
+安装：make install
+技术报告：make report
+卸载：make clean
+
+用C语言分别实现了Windows和Linux下绘制Mandelbrot Set的程序
+
+注意：运行程序时，输入的第一个数不宜过大，最好是个位数
+
+渐变色的执行方式只实现了一种，可通过修改少量源代码自定义渐变方式,修改位置见源代码
+
+根据操作系统或编译器的不同，渐变色功能可能存在bug，如有问题或建议可联系pengpai3141592654@gmail.com
+
+已上传到github : https://github.com/PAI3141592654/HelloWorld
+
